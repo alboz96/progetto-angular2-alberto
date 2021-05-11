@@ -1,0 +1,4 @@
+La JsonPipe e' un modo facile per diagnosticare un data binding fallito o ispezionare un oggetto per un binding futuro.
+
+IMPORTANTE: Se si implementa una Pipe di tipo Pure con una funzione di tipo Impure (asincrona ad esempio),
+            potranno presentarsi errori in console riguardanti le espressioni che sono cambiate dopo essere state checked.

@@ -1,0 +1,14 @@
+Un modulo Angular, che sia quello di root o una feature, è una classe con il decorator @NgModule.
+
+Le proprietà più importanti sono:
+
+declarations - le classi views che appartengono a questo modulo. Angular ha 3 tipi di view classes: components, directives, and pipes.
+
+exports - il sottoinsieme delle declarations che dovrebbe essere visibile e usabile nei template dei componenti presenti negli altri moduli.
+
+imports - sono le classi esportate da altri moduli di cui hanno bisogno i template dei componenti presenti in questo modulo.
+
+providers - creatori di servizi che vengono inseriti qui a livello globale; Sono accessibili in ogni parte dell'applicazione
+
+bootstrap - la vista principale dell'applicazione, chiamatail root component, che ospita tutte le viste dell'applicazione al suo interno.
+	    Solo il modulo di root dovrebbe settare questa proprietà per effettuare il bootstrap (avvio dell'applicazione)

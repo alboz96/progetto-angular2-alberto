@@ -1,0 +1,38 @@
+<b>INTERPOLAZIONE (esempio 1):</b>
+<p>My current hero is {{currentHero.name}}</p>
+
+<b>INTERPOLAZIONE:</b>
+<b>INTERPOLAZIONE (esempio 2):</b>
+  {{title}}
+  <img src="{{heroImageUrl}}" style="height:30px">
+
+<b>ESPRESSIONI:</b>
+<!-- "The sum of 1 + 1 is 2" -->
+<p>The sum of 1 + 1 is {{1 + 1}}</p>
+<!-- "The sum of 1 + 1 is not 6" -->
+<p>The sum of 1 + 1 is not {{1 + 1 + getVal(2,2)}}</p>
+
+<b>Template variable (let hero):</b>
+<div *ngFor="let hero of heroes">{{hero.name}}</div>
+
+<b>Template Reference variable ():</b>
+<input #heroInput (change)="stampa($event, heroInput)"> 
+<p>{{heroInput.value}}</p>
+
+<!-- flow da elemento del .html a .ts del componente -->
+<p><button (click)="alertFn()">clicca per alert</button></p>
+
+<b>Usare template variable da .ts (ViewChild e ContentChild) <br>
+  Differenza tra @ViewChild e @ContentChild: <br>
+  1) ViewChild permette di agganciare nel .ts del componente un elemento del DOM o componente presente nel suo .html (anche una reference variable) <br>
+  2) ContentChild permette di aggianciare nel .ts del componente un elemento del DOM o componente il quale sia stato specificato come contenuto all'interno del suo TAG html
+</b>
+
+<p #refTemplateVar>Descrizione template variable</p>
+
+<b>
+  Eventi
+</b>
+<p>
+  <button (click)="clickMessage($event)">clicca per vedere in console l'evento</button>
+</p>

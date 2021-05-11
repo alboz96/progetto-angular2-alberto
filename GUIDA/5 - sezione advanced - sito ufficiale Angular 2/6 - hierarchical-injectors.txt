@@ -1,0 +1,12 @@
+hierarchical injectors:
+I servizi devono essere elencati nell'array providers del modulo in questione o del componente che ne fara' uso
+IMPORTANTE: 
+ - Registrare un servizio a livello di componente (inserirlo nel suo array providers) significa che otterrai una nuova istanza del servizio per ogni istanza di quel componente.
+   I servizi sono iniettati nei componenti tramite la dependency injection, ovvero definendoli nel costruttore del componente che deve importarli
+ - Inoltre registrando un servizio a livello di componente (inserirlo nel suo array providers) renderà l'istanza del servizio iniettato in quel componente,
+   disponibile a tutti i componenti figli (usati all'interno del template) di quel componente.
+   Quindi i componenti figli potranno riutilizzare i servizi già regisgtrati nell'array providers di un componente padre, senza doverlo
+   ridefinire nel proprio array providers. Nel caso mancasse il servizio nel componente padre, Angular risale al componente successivo,
+   fino ad arrivare al più alto della gerarchia, in cui nel caso mancasse, genera un errore.
+   Per ridefinire un servizio nel componente figlio, il quale ha un nome uguale a quello del padre è possibile sovrascriverlo definendolo nell'array providers del componente figlio (non consigliato)
+ - Registrare un servizio a livello di modulo (inserirlo nel suo array providers), rendera' disponibile una sola istanza di quel servizio in tutto il modulo (singleton)

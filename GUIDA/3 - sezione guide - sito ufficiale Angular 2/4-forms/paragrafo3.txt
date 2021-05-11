@@ -1,0 +1,13 @@
+TWO-WAY DATA BINDING WITH NGMODEL:
+SPIEGAZIONE DEL TEMPLATE DRIVEN FORM:
+-Le classi css container, form-group, form-control, sono di Bootstrap. 
+-Internamente ed automaticamente Angular crea delle istanze di FormControl (agganciate ai tag di input o controllare nel form) e le registra con una direttiva NgForm che Angular applicata al tag <form>.
+-Ogni FormControl è registrato sotto il nome che viene assegnato all'attributo name del campo html.
+-Ogni label ha un attributo for che contiene come valore l'id dell'input a cui si deve affiancare la label
+-Ogni elemento input ha una proprietà name che è richiesta dal form Angular per registrare il formControl al form. 
+-NgModel oltre a garantire il two-way-binding consente di gestire lo stato del valore nel form ed espone delle classi css da utilizzare in base allo stato dell'input
+ State                           Class if true	Class if false
+The control has been visited.	   ng-touched	ng-untouched
+The control's value has changed.   ng-dirty	    ng-pristine
+The control's value is valid.	   ng-valid	    ng-invalid
+-Il submit del form verrà gestito tramite la proprietà evento NgForm.ngSubmit applicata sul tag form e richiamata dall'input type="submit"

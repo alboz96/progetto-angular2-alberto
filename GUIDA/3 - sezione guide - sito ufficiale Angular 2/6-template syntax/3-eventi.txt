@@ -1,0 +1,12 @@
+// 3) eventi
+<button (click)="onSave()">Save</button>
+<button (click)="onSave($event)">Save</button>
+
+<button (click)="deleteHero()">Delete hero</button>
+
+OPPURE
+
+<button on-click="deleteHero()">Delete hero</button>
+
+<div (click)="clicked=$event" clickable>click me</div>
+<app-hero-detail (deleteRequest)="deleteHero()"></app-hero-detail> //variabile @Output deleteRequest

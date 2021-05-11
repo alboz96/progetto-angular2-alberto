@@ -1,0 +1,15 @@
+{
+    "description_prova": "descrizione tradotta",
+    "HELLO": "ciao {{value}}",
+    "SEZIONE":{
+        "capitolo1": {
+            "label1": "traduzione label 1, capitolo 1 della sezione",
+            "label2": "traduzione label 2, capitolo 1 della sezione"
+        },
+        "capitolo2": {
+            "label1": "traduzione label 1, capitolo 2 della sezione",
+            "label2": "traduzione label 2, capitolo 2 della sezione"
+        }
+    },
+    "contengo_html": "tag HTML:<br><strong>Sono in grassetto</strong>"
+}

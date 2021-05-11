@@ -1,0 +1,4 @@
+//7) ESEMPIO (CICLO for..of)
+for (let item of items) {
+	
+ }

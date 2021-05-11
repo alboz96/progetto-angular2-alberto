@@ -1,0 +1,33 @@
+I CSS vengono generati in maniera incapsulata per ogni componente dell'applicazione senza modificare i css degli altri componenti
+e dell'applicazione.
+Nei metadati del componente si può settare la view encapsulation mode (modo di incapsulazione della vista), tra i seguenti tipi:
+-native
+-emulated 
+-none 
+Il metadato da mettere nel componente è encapsulation: ViewEncapsulation.Native
+
+esempio:
+se ispezionassimo l'html di un'app contenente diversi componenti vedremo una cosa del genere:
+
+<hero-details _nghost-pmm-5>
+  <h2 _ngcontent-pmm-5>Mister Fantastic</h2>
+  <hero-team _ngcontent-pmm-5 _nghost-pmm-6>
+    <h3 _ngcontent-pmm-6>Team</h3>
+  </hero-team>
+</hero-detail>
+
+E noteremo che ci sono due tipi di attributi generati dalla compilazione:
+Un elemente che sarebbe il shadow DOM host della incapsulazione nativa nominato attributo _nghost. Questo è tipicamente il caso per gli host elements del componente.
+Un elemento con una vista componente ha un attributo _ngcontent che identifica a quale host emulato shadow DOM a cui questo elemento appartiene.
+Questi attributi sono generati automaticamente e sono targhettati dagli stili css generati per il componente e si trovano nella sezione <head> del DOM
+
+esempio:
+[_nghost-pmm-5] {
+  display: block;
+  border: 1px solid black;
+}
+
+h3[_ngcontent-pmm-6] {
+  background-color: white;
+  border: 1px solid #777;
+}

@@ -1,0 +1,9 @@
+<div>-- projected content begins --</div>
+<!-- Il TAG <ng-content> è un placeholder per il contenuto esterno. 
+     Serve ad Angular per capire dove dovrà inserire il contenuto esterno
+     In questo caso, il contenuto proiettato è il tag <my-child> dal componente padre -->
+<ng-content></ng-content> <!--mette il contenuto presente all'interno del TAG after-content, ovvero <my-child></my-child> -->
+<div>-- projected content ends --</div>
+<p *ngIf="comment" class="comment">
+{{comment}}
+</p>

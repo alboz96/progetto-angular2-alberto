@@ -1,0 +1,43 @@
+<h2>{{title}}</h2>
+<p>
+New hero:
+  <input type="text" #box
+          (keyup.enter)="addHero(box.value); box.value=''"
+          placeholder="hero name">
+  <input id="can-fly" type="checkbox" [(ngModel)]="canFly"> can fly
+</p>
+<p>
+  <input id="mutate" type="checkbox" [(ngModel)]="mutate">Mutate array
+  <button (click)="reset()">Reset</button>
+</p>
+
+<h4>Heroes who fly (piped with Pure Pipe)</h4>
+<b>Con il muted non si aggiorna l'array, perchè con il push non cambia la sua reference (aggiunge solo un oggetto alla lista dell'istanza dell'array gia' creata)</b>
+<b>Senza il muted si aggiorna l'array, perchè con il concat cambia la sua reference (crea un nuovo array come risultato della concatenazione di altri 2 array)</b>
+<p>Angular esegue una pipe Pure solo quando rileva un cambiamento "puro" del valore in input. <br>
+  Un cambiamento "puro" è quando il valore in input cambia in un tipo primitivo (String, Number, Boolean, Symbol) o cambia la reference dell'oggetto (Date, Array, Function, Object). <br>
+  Angular ignora i cambiamenti negli (composti) oggetti. <br>
+  Non chiamerà una Pure pipe se cambierai il mese di una data, aggiungerai una cella ad un array, o se aggiornerai la property di un oggetto.
+</p>
+<div id="flyers">
+  <div *ngFor="let hero of (heroes | flyingHeroes)">
+    {{hero.name}}
+  </div>
+</div>
+
+<h4>Heroes who fly (piped with Impure Pipe)</h4>
+<b>Si aggiorna sempre, anche con il push perchè il refresh del filtro viene scatenato da ogni evento del DOM (click, mouseover, ecc...)</b>
+<p>Angular esegue una Impure Pipe durante ogni ciclo di change detection del componente. <br>
+   Una Impure Pipe è chiamata spesso, così spesso quanto ogni pulsante premuto (keystroke) o movimento del mouse e può rallentare la user experience</p>
+<div id="flyers">
+  <div *ngFor="let hero of (heroes | flyingHeroesImpure)">
+    {{hero.name}}
+  </div>
+</div>
+
+<h4>All Heroes (no pipe)</h4>
+<div id="all">
+  <div *ngFor="let hero of heroes">
+    {{hero.name}}
+  </div>
+</div>

@@ -1,0 +1,36 @@
+<b>La property del DOM hidden per il TAG div, lo nasconde, ma non lo elimina dal DOM</b>
+<div [hidden]="!isVisible">Show with DOM property or CSS class</div>
+<div [hidden]="isVisible">Hide with DOM property or CSS class</div>
+<br>
+<b>Lo stesso vale per display none</b>
+<div [style.display]="isVisible ? 'block' : 'none'">Show with style</div>
+<div [style.display]="isVisible ? 'none'  : 'block'">Hide with style</div>
+<br>
+<b>*NgIf invece lo elimina direttamente dal DOM</b>
+<b>*NgIf è anche una guard against null values, perchè permette di eliminare un blocco del DOM per un valore null o undefined</b>
+<div *ngIf="isVisible">Visibile</div>
+<div *ngIf="!isVisible">Non visibile</div>
+<div><button (click)="isVisible = !isVisible">Toggle isVisible</button></div>
+<br>
+<b>*NgFor permette di iterare su una lista, creando dinamicamente elementi del DOM</b>
+<app-hero-detail *ngFor="let hero of heroes" [hero]="hero"></app-hero-detail>
+<br>
+<b>*NgFor indicizzato</b>
+<div *ngFor="let hero of heroes; let i=index">{{i + 1}} - {{hero.name}}</div>
+<br>
+<b>*ngFor con trackBy per triggerare meno eventi sulle liste grandi, mantenendo mappati gli oggetti</b>
+<div *ngFor="let hero of heroes; trackBy: trackByHeroes">
+    ({{hero.id}}) {{hero.name}}
+</div>
+<b>[ngSwitch] per usare lo switch (direttiva di attributo), mentre *ngSwitchCase e *ngSwitchDefault per case e default (direttive strutturali)</b>
+<div>
+  Inserisci il colore:
+  <input [(ngModel)]="chosenColor">
+</div>
+<br>
+<div [ngSwitch]="chosenColor">
+    <p    *ngSwitchCase="'blu'" class="blu">Colore blu</p>
+    <p    *ngSwitchCase="'rosso'" class="rosso">Colore rosso</p>
+    <p    *ngSwitchCase="'giallo'" class="giallo">Colore giallo</p>
+    <p    *ngSwitchDefault        >Colore nero</p>
+</div>

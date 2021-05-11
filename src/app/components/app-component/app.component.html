@@ -1,0 +1,13 @@
+<div class="container-fluid page-size">
+    <app-navbar (search)="sidebarFilter($event)" class="row navbarBorders"></app-navbar>
+    <div class="row content-size">
+        <app-sidebar [myFilter]=filter class="col-md-3 col-lg-2 sidebarClass"></app-sidebar>
+        <!--ROUTING-->
+        <div class="col-md-9 col-lg-10">
+                <router-outlet></router-outlet>
+        </div>
+    </div>
+    <!-- <div class="row footer-size footerBorders">
+        <app-footer class="col-sm-12" style="padding-left: 0; padding-right: 0"></app-footer>
+    </div> -->
+</div>

@@ -1,0 +1,8 @@
+<b>Componente con Input e Output usati anche come two-way-binding</b>
+<app-sizer [(size)]="fontSizePx"></app-sizer>
+<p>property di input: size    property di output: sizeChange</p>
+<app-sizer [size]="fontSizePx" (sizeChange)="fontSizePx=$event"></app-sizer>
+<div [style.font-size.px]="fontSizePx">Resizable Text</div>
+<br>
+<b>Proprietà di output (evento custom myClick)</b>
+<div (myClick)="clickMessage=$event" clickable>click with myClick</div>

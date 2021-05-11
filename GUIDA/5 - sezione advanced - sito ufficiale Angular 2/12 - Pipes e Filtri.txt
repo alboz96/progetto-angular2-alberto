@@ -1,0 +1,36 @@
+PIPES:
+Una pipe prende dei dati input e li trasforma nell'output desiderato. 
+
+Pipes e change detection (rilevamento dei cambiamenti):
+Angular cerca delle differenze nel valore bindato, attraverso un processo di rilevamento che viene eseguito ad ogni evento del DOM: 
+every keystroke, mouse move, timer tick, and server response. 
+Questo potrebbe diventare troppo dispendioso.
+
+Le Pipes esistono in 2 tipi diversi: Pure e Impure
+Pipes sono di default di tipo Pure.
+//PURE
+Angular esegue una pipe Pure solo quando rileva un cambiamento "puro" del valore in input. 
+Un cambiamento "puro" è quando il valore in input cambia in un tipo primitivo (String, Number, Boolean, Symbol) o cambia la reference dell'oggetto (Date, Array, Function, Object).
+Angular ignora i cambiamenti negli (composti) oggetti. Non chiamerà una Pure pipe se cambierai il mese di una data, aggiungerai una cella ad un array, o se aggiornerai la property di un oggetto.
+//IMPURE
+Angular esegue una Impure Pipe durante ogni ciclo di change detection del componente.
+Una Impure Pipe è chiamata spesso, così spesso quanto ogni pulsante premuto (keystroke) o movimento del mouse e può rallentare la user experience
+
+La AsyncPipe IMPURE:
+La AsyncPipe di Angular e' un esempio di impure pipe. 
+La AsyncPipe di Angular accetta come valore in input una Promise o un Observable e fa il subscribes all'input automaticamente,
+ritornando un eventuale valore del risultato emesso.
+La AsyncPipe e' anche stateful.
+La pipe mantiene una subscription all'Observable in input e mantiene i valori rilasciati dall'Observable.
+
+La Custom Pipe Http Async Call IMPURE:
+Se mettessimo un breakpoint sulla request effettuata dalla Pipe, si dimostrerebbero le seguenti caratteristiche:
+Ogni binding ad un valore ottiene la propria istanza della pipe.
+Ogni istanza della pipe mette in cache il proprio URL e valore salvati nelle variabili all'interno della pipe.
+Ogni istanza della pipe DEVE chiamare il server una volta sola.
+
+La JsonPipe e' un modo facile per diagnosticare un data binding fallito o ispezionare un oggetto per un binding futuro.
+
+IMPORTANTE: Se si implementa una Pipe di tipo Pure con una funzione di tipo Impure (asincrona ad esempio),
+            potranno presentarsi errori in console riguardanti le espressioni che sono cambiate dopo essere state checked.
+

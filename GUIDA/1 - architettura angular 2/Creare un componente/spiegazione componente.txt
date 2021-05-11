@@ -1,0 +1,13 @@
+Un componente Angular, � una classe con il decorator @Component.
+
+TUTTI I COMPONENTI SONO ANCHE DIRETTIVE
+
+Le propriet� pi� importanti sono:
+
+-selector: CSS selector che dice ad Angular dove inserire il componente nell'HTML del componente padre. Quindi � il TAG HTML che rappresenter� il componente. 
+
+-templateUrl: path relativo dell'html del componente
+
+-providers: array di dependency injection providers per i servizi che il compoennte richiede.
+ 	    Questo � un modo per dire ad Angular che il costruttore del componente richiede un servizio.
+-styleUrls: array di path relativi di file css da applicare solo per questo componente

@@ -1,0 +1,8 @@
+Guards against null:
+//MODO 1
+<!--No hero, div not displayed, no error -->
+<div *ngIf="nullHero">The null hero's name is {{nullHero.name}}</div>
+//MODO 2
+The safe navigation operator ( ?. ) and null property paths
+The current hero's name is {{currentHero?.name?.altraSottoproprietà}}
+It works perfectly with long property paths such as a?.b?.c?.d.

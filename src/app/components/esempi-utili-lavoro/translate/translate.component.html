@@ -1,0 +1,23 @@
+<p>
+Traduzione non parametrizzata: {{ 'description_prova' | translate }}
+</p>
+<p>
+Traduzione parametrizzata: {{ 'HELLO' | translate:param }} <!-- traduzione parametrizzata -->
+</p>
+<p>
+Traduzioni in json annidati: 
+<br>
+{{'SEZIONE.capitolo1.label1' | translate}}
+<br>
+{{'SEZIONE.capitolo1.label2' | translate}}
+<br>
+{{'SEZIONE.capitolo2.label1' | translate}}
+<br>
+{{'SEZIONE.capitolo2.label2' | translate}}
+</p>
+<!-- hmtl nella traduzione-->
+<p [innerHTML]="'contengo_html' | translate"></p>
+<p>{{'label_non_gestita' | translate}}</p>
+<p>{{'custom_label_lato_server' | translate}}</p>
+<br>
+<button (click)="cambioLingua()">Cambia Lingua</button>

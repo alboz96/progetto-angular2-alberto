@@ -1,0 +1,3 @@
+GUIDA ANGULAR 2 => https://v2.angular.io/docs/ts/latest/guide/
+ogni sezione di questa guida ha uno o più componenti nelle cartelle guida-parte-n:
+esempio la parte 6-displaying data è suddivisa in più componenti nella cartella guida-parte-6

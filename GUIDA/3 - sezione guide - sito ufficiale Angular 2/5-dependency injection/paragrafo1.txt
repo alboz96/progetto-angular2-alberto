@@ -1,0 +1,76 @@
+-NOTA: per creare un servizio iniettabile si usa @Injectable(), NON @Injectable. 
+ Bisogna ricordare le parentesi, in quanto si possono passare parametri
+
+-Quando bisogna iniettare un servizio (@Injectable()) nell'array providers dell'app.module.ts:
+    si può iniettare in questo modo:   providers: [Logger]
+
+    oppure in maniera equivalente
+
+    in questo modo: providers: [{ provide: Logger, useClass: Logger }]
+    in cui in provide viene inserita la chiave della mappa che servirà al momento dell'istanza del servizio e per linkare
+    il servizio stesso alla classe passata come valore a useClass, in quanto si potrebbe voler sostituire il Logger originale
+    con uno mock o migliore, esempio:
+    [{ provide: Logger, useClass: BetterLogger }
+
+    Ma nel caso in cui Logger fosse già iniettato e noi volessimo mantenere un servizio mappato per poterlo cambiare in futuro,
+    dovremo evitare il seguente errore:
+
+    ERRORE:
+  [ NewLogger,
+  // Not aliased! Creates two instances of `NewLogger`
+  { provide: OldLogger, useClass: NewLogger}]
+  The solution: alias with the useExisting option.
+
+    GIUSTO: (uso useExisting per indicare un servizio esistente già iniettato)
+  [ NewLogger,
+  // Alias OldLogger w/ reference to NewLogger
+  { provide: OldLogger, useExisting: NewLogger}]
+
+-Un altro caso particolare è quando dobbiamo iniettare come provider un valore singolo o un oggetto generico nell'array providers dell'app.module:
+  { provide: APP_CONFIG, useValue: HERO_DI_CONFIG } => va messo nell'app.module.ts
+  //provide contiene la chiave di mapping del file contenente i dati della configurazione 
+  //la chiave in provide è anche usata come parametro passato nell'annotation @Injectable() => in questo caso sarebbe @Injectable(APP_CONFIG)
+  //in useValue è presente il valore o l'oggetto che corrisponde ai dati della configurazione => in questo caso la costante HERO_DI_CONFIG
+
+  considerando la seguente classe:
+  import { OpaqueToken } from '@angular/core';
+
+  export let APP_CONFIG = new OpaqueToken('app.config'); //'app.config' è il nome del file della configurazione
+                                                         //APP_CONFIG è la chiave del provider
+  export interface AppConfig {
+    apiEndpoint: string;
+    title: string;
+  }
+
+  export const HERO_DI_CONFIG: AppConfig = {
+    apiEndpoint: 'api.heroes.com',
+    title: 'Dependency Injection'
+  };
+
+  Si inietta il provider come nel seguente esempio (rendendo utilizzabile l'oggetto config, 
+  tipizzato dall'interfaccia AppConfig):
+
+  @Component({
+  selector: 'app-ng-guida-9-1',
+  templateUrl: './ng-guida-9-1.component.html',
+  styleUrls: ['./ng-guida-9-1.component.css']
+})
+export class NgGuida91Component {
+
+  title: string;
+
+  constructor(
+    @Inject(APP_CONFIG) config: AppConfig,
+    private userService: UserService) { //INIETTO IL SERVIZIO UserService che è un @Injectable()
+    this.title = config.title;
+  }
+
+  get isAuthorized() { return this.user.isAuthorized; }
+  nextUser()         { this.userService.getNewUser(); }
+  get user()         { return this.userService.user; }
+
+  get userInfo()     {
+    return `Current user, ${this.user.name}, is ` +
+           `${this.isAuthorized ? '' : 'not'} authorized. `;
+  }
+}
