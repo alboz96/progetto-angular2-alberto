@@ -1,32 +1,33 @@
-import { Component, OnInit, ViewChild, TemplateRef, ElementRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  TemplateRef,
+  ElementRef,
+} from "@angular/core";
 
 @Component({
-  selector: 'app-ng-guida-10-1',
-  templateUrl: './ng-guida-10-1.component.html',
-  styleUrls: ['./ng-guida-10-1.component.css']
+  selector: "app-ng-guida-10-1",
+  templateUrl: "./ng-guida-10-1.component.html",
+  styleUrls: ["./ng-guida-10-1.component.css"],
 })
 export class NgGuida101Component implements OnInit {
-
-  @ViewChild('refTemplateVar')
+  @ViewChild("refTemplateVar")
   refTemplateVar: ElementRef;
 
-
   currentHero = {
-    name: "Pippo"
+    name: "Pippo",
   };
 
   title: String = "Titolo";
 
   //Path relativo da src
-  heroImageUrl = '../../../assets/img/angular2typescript.png';
+  heroImageUrl =
+    "https://github.com/alboz96/progetto-angular2-alberto/blob/main/src/assets/img/angular2typescript.png";
 
-  heroes = [
-    {'name' : 'Pippo'},
-    {'name' : 'Pluto'},
-    {'name' : 'Paperino'}
-];
+  heroes = [{ name: "Pippo" }, { name: "Pluto" }, { name: "Paperino" }];
 
-  getVal(x: number , y: number): number{
+  getVal(x: number, y: number): number {
     return x + y;
   }
 
@@ -35,7 +36,7 @@ export class NgGuida101Component implements OnInit {
     console.log(heroInput);
   }
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
     console.log("Template Reference variable con ViewChild:");
@@ -49,5 +50,4 @@ export class NgGuida101Component implements OnInit {
   clickMessage($event) {
     console.log($event);
   }
-
 }
