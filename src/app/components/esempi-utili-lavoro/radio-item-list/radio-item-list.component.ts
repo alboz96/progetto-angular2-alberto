@@ -1,47 +1,48 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from "@angular/core";
 
 @Component({
-  selector: 'app-radio-item-list',
-  templateUrl: './radio-item-list.component.html',
-  styleUrls: ['./radio-item-list.component.css']
+  selector: "app-radio-item-list",
+  templateUrl: "./radio-item-list.component.html",
+  styleUrls: ["./radio-item-list.component.css"],
 })
 export class RadioItemListComponent implements OnInit {
   // @ViewChild('myForm')
-  formModel: any = {}
+  formModel: any = {};
   formGrande: any = {
     sottoForm: {
       radioItems: [
         {
           description: "Pippo",
           name: "pippo",
-          value: "PI"
+          value: "PI",
         },
         {
           description: "Pluto",
           name: "pluto",
-          value: "PL"
+          value: "PL",
         },
         {
           description: "Paperino",
           name: "paperino",
-          value: "PA"
-        }
-      ]
-    }
-};
+          value: "PA",
+        },
+      ],
+    },
+  };
   items: any;
-  constructor() {
-   }
+  constructor() {}
 
   ngOnInit() {
     this.items = this.formGrande.sottoForm.radioItems;
 
     this.formModel = {
-      selectedRadio : this.items[1].value
+      selectedRadio: this.items[1].value,
     };
   }
 
   onChangeSelection(selectedItem) {
     console.log("hai selezionato: " + selectedItem.description);
   }
+
+  onSubmit() {}
 }
