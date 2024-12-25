@@ -1,1 +1,0 @@
-gli stili utilizzati all'interno un componente non influenzano gli altri componenti o il resto dell'applicazione

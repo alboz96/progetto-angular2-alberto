@@ -1,3 +1,0 @@
-// 5) per applicare un singolo attributo HTML (aria-label) in maniera dinamica (per alcune eccezioni che possono esserlo)
-      //da usare per tutti gli attributi che non hanno una proprietà corrispondente del DOM (ad esempio colspan)
-<button [attr.aria-label]="help">help</button>

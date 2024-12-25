@@ -1,2 +1,0 @@
-GLI EVENTI:
-(click)="nomeFunzioneNelTsComponente($event)"

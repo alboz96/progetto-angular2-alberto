@@ -1,4 +1,0 @@
-TEMPLATE DRIVEN FORMS:
-Esistono 2 tipi di forms:
- - Template Driven forms
- - Reactive (oppure Model Driven) Forms

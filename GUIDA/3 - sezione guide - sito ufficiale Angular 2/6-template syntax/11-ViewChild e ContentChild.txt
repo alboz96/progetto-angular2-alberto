@@ -1,9 +1,0 @@
-If you must read a target element property or call one of its methods,
-you'll need a different technique. 
-See the API reference for ViewChild and ContentChild.
-
-Se ho una reference variable (#nomeVariabile in un .html), posso usarla lato .ts usando la direttiva @ViewChild('nomeVariabile') myVar;
-
-- differenza tra @ViewChild e @ContentChild:
-  1) ViewChild permette di agganciare nel .ts del componente un elemento del DOM o componente presente nel suo .html (anche una reference variable)
-  2) ContentChild permette di aggianciare nel .ts del componente un elemento del DOM o componente il quale sia stato specificato come contenuto all'interno del suo TAG html

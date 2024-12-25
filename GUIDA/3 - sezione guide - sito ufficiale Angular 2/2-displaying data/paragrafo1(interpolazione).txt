@@ -1,3 +1,0 @@
-app-ng2-guida-6-1:
-
-bind proprietà con interpolazione (parentesi graffe doppie) {{}}

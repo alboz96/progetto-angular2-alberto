@@ -1,2 +1,0 @@
-Prima di usare la direttiva ngModel in un two-way data binding, 
-tu devi importare il FormsModule e aggiungela all'array import del modulo di Angular (NgModule). 

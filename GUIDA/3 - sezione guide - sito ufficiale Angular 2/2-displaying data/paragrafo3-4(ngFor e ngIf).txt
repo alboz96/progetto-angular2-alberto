@@ -1,2 +1,0 @@
-Le direttive strutturali come ngFor e ngIf, agiscono generando e rimuovendo elementi dal DOM
-*ngFor si applica per qualsiasi oggetto iterabile (Iterable), non solo per gli array

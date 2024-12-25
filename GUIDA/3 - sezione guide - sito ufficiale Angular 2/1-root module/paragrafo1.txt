@@ -1,3 +1,0 @@
- 1) BrowserModule bisogna metterlo nell'array imports dell'AppModule di ogni applicazione che debba girare su Browser
- 2) Solo le classi con decorator @NgModule vanno messe nell'array imports
- 3) Solo componenti, direttive, pipe vanno messi nell'array declarations

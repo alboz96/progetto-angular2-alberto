@@ -1,4 +1,0 @@
-Nell'index.html va inserito il tag <base href="/">
-con il path impostato a "/", lui punterà alla root dell'applicazione
-Quando il tag base è malconfigurato l'app andrà in errore 404 - Not Found errors per i file mancanti in quel path indicato.
-

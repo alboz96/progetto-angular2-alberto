@@ -1,9 +1,0 @@
-Revise app.module.ts:
-Per il setup di un Template Driven Form:
-
-- importare FormsModule (in array imports di app.module.ts) ed il componente che contiene il form (in array declarations di app.module.ts), perchè app.module.ts contiene il ngModule decorator
-in questo modo rendo disponibile ogni funzionalità dei Template Driven Form ed anche la direttiva ngModel
-invece aggiungendo in questo modo il componente che contiene il form nelle declarations, lo rendo visibile in questo modulo (app.module.ts)
-
-Se un component, directive, or pipe appartiene ad un modulo nell'array imports, ​non ridichiararlo nell'array declarations. 
-Se il componente è scritto dallo sviluppatore, ​va dichiarato nell'array declarations.
