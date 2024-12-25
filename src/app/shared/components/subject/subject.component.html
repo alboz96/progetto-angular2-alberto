@@ -1,0 +1,25 @@
+<b>Subject: Un Subject è come un Observable, ma può multicast(are) a più Observers. 
+   Quindi dato un Subject, posso usare il metodo .subscribe()
+   Subjects sono come gli EventEmitters: loro mantengono un registro di molti listeners.</b>
+<br> <br>
+<b>Esempio 1: Associare 2 listeners ad un Subject</b>
+<p>
+ <span *ngFor="let item of subjectExample1Array">{{item}}</span>
+</p>
+<br><br>
+<b>Esempio 2: Associare 3 listeners ad un Subject usando from</b>
+<p>
+    <span *ngFor="let item of subjectExample2Array">{{item}}</span>
+</p>
+<b>Esempio 4: Behavior Subject, consiste nel tracciare valori che cambiano nel tempo</b>
+<p>
+    <span *ngFor="let item of subjectExample4Array">{{item}}</span>
+</p>
+<b>Esempio 5: ReplaySubject, registra diversi valori dall'esecuzione dell'Observable e li replica per i nuovi subscribers</b>
+<p>
+    <span *ngFor="let item of subjectExample5Array">{{item}}</span>
+</p>
+<b>Esempio 6: AsyncSubject è una variante dove solamente l'ultimo valore dell'esecuzione dell'Observable è mandata ai suoi observers, e solo quando l'esecuzione è completata.</b>
+<p>
+    <span *ngFor="let item of subjectExample6Array">{{item}}</span>
+</p>

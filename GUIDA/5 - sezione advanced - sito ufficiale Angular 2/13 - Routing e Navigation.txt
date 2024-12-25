@@ -1,0 +1,64 @@
+Routing e Navigation:
+
+- serve per fare single page application.
+
+- L'ordine delle routes nella configurazione importa, in quanto fa parte della sua progettazione:
+  Il router usa una strategia first-match wins per trovare la prima route compatibile, 
+  cosi' le rotte piu' specifiche dovrebbero essere piazzate sopra a quelle più generiche (meno specifiche).
+  { path: '**', component: NotFoundComponent} //** e' una wildcard che indica una route differente da qualsiasi delle precedenti
+  { path: '', redirectTo: '/heroes', pathMatch: 'full'} //quando il path è esattamente vuoto, si viene reindirizzati a /heroes
+
+- Quindi importa anche l'ordine in cui vengono importati i moduli. Perchè ogni modulo feature dovrebbe importare dentro se stesso il proprio modulo per il routing.
+  Quindi le routes saranno concatenate in base all'ordine in cui sono importati i corrispettivi moduli
+
+- <router-outlet></router-outlet> e' un tag usato per iniettare le viste da Routing
+
+- La direttiva RouterLink sul tag ancora <a></a> fornisce il controllo del router sulle routes. 
+  I path di navigazione sono fissi, cosi' tu puoi assegnare una stringa al routerLink.
+
+- La direttiva RouterLinkActive sul tag ancora <a></a> distingue l'ancora attualmente selezionata (attiva). 
+  Questo avviene in quanto viene applicata una classe CSS (".active") all'elemento quando l'associato RouterLink diventa attivo. 
+  Questa direttiva può essere aggiunta all'ancora o al suo elemento padre.
+
+- Tu puoi accedere il corrente RouterState da ovunque nell'applicazione usando il Router service e la property routerState.
+
+
+  Chiama solamente il RouterModule.forRoot nel routing di root, ovvero AppRoutingModule (oppure l'AppModule se le top level routes sono state registrate direttamente nell'AppModule senza un modulo di supporto). 
+  In ogni altro modulo (feature module), tu devi chiamare il metodo RouterModule.forChild per registrare routes aggiuntive.
+
+Ci sono 2 servizi disponibili per gestire il routing:
+- ActivatedRoute: e' un service che e' provided ad ogni component che contiene delle informazioni specifiche di route come ad esempio:
+  route parameters, static data, resolve data, global query params, and the global fragment.
+- Router  per navigare verso le altre pagine
+
+ActivatedRoute contiene le seguenti informazioni:
+  url: E' un Observable del/i path della route, rappresentati come un array di stringhe per ogni parte del path della route.
+  data: Un Observable che contiene l'oggetto data object fornito per la route. Contiene anche ogni valore risolto dalla resolve guard.
+  params: Un Observable che contiene i parametri obbligatori o opzionali della route.
+  queryParams: Un Observable che contiene i parameters query disponibili a tutte le routes.
+  fragment: Un Observable del fragment dell'URL disponibile a tutte le routes.
+  outlet: Il nome del RouterOutlet usato per reindirizzare la route. Per un outlet senza nome, il nome di default e' primary.
+  routeConfig: La configurazione della route e' usata per la route che contiene il path di origine.
+  parent: Un ActivatedRoute che contiene l'informazione dalla route padre quando vengono usate le child routes.
+  firstChild: Contiene la prima ActivatedRoute della lista delle child routes.
+  children: Contiene tutte le child routes activated sotto la route corrente.
+
+- Quindi i params vengono gestiti dal Router come Observable, ma esiste un'alternativa al loro passaggio come 
+  oggetti NON Observable, ovvero lo snapshot (contiene il valore iniziale del parametro e non si aggiorna nel tempo a differenza dell'Observable) 
+  Se il componente che prende i dati dal routing non viene riusato allora si puo' usare lo snapshot
+
+- PASSARE PARAMETRI CON ROUTER NAVIGATE, in Url Matrix Notation
+  this.router.navigate(['/heroes', { id: heroId, foo: 'foo' }]);
+  Il risultato sarà avere il seguente URL:
+  localhost:3000/heroes;id=15;foo=foo
+  NOTA: I parametri sono separati da ; e non da ? e &, come per i query params
+
+Controlli per il routing:
+- CanActivate guard (controlla l'accesso ad una route).
+- CanActivateChild guard (controlla l'accesso ad una child route (una rotta sotto children)).
+- CanDeactivate guard (chiede il permesso per scartare i cambiamenti non salvati).
+- Resolve guard (pre-fetching route data).
+- The CanLoad guard (controllo prima del caricamento del feature module).
+  Usato per il Lazy loading feature modules.
+
+

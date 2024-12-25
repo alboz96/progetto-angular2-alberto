@@ -1,0 +1,54 @@
+////////////////////////////////////////////////ESEMPI BASE UTILI /////////////////////////////////////////////////////////////////
+//1) TIPI VARIABILI
+
+//stringhe
+let fullName: string = `Bob Bobbington`;
+let age: number = 37;
+let sentence: string = `Hello, my name is ${ fullName }.`
+/////////////////////////////////////////////////////////
+
+//array
+let list: number[] = [1, 2, 3];
+The second way uses a generic array type, Array<elemType>:
+let list: Array<number> = [1, 2, 3];
+//////////////////////////////////////////////////////////
+
+//tuple
+// Declare a tuple type
+let x: [string, number];
+// Initialize it
+x = ["hello", 10]; // OK
+// Initialize it incorrectly
+x = [10, "hello"]; // Error
+x[3] = "world"; // OK, 'string' can be assigned to 'string | number'
+//////////////////////////////////////////////////////////////////////
+
+//enum
+enum Color {Red, Green, Blue}
+let c: Color = Color.Green;
+
+enum Color {Red = 1, Green = 2, Blue = 4}
+let c: Color = Color.Green;
+///////////////////////////////////////////
+
+//any
+let notSure: any = 4;
+notSure = "maybe a string instead";
+notSure = false; // okay, definitely a boolean
+///////////////////////////////////////////////
+
+//void
+function warnUser(): void {
+    alert("This is my warning message");
+}
+Declaring variables of type void is not useful because you can only assign undefined or null to them:
+
+let unusable: void = undefined;
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//never
+// Function returning never must have unreachable end point
+function infiniteLoop(): never {
+    while (true) {
+    }
+/////////////////////////////////////////////////////////////

@@ -1,0 +1,6 @@
+
+funzione .map
+function pluck(o, names) {
+//n è una singola cella dell'array (o oggetto) names (n è il parametro passato alla funzione, mentre o[n] è ciò che ritorna la funzione applicata per ogni elemento di names)
+    return names.map(n => o[n]);
+}

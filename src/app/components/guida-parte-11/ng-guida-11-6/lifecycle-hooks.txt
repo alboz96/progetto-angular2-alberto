@@ -1,0 +1,36 @@
+LIFECYCLE HOOKS (si possono usare sia per i componenti sia per le direttive):
+ngOnChanges: Chiamato quando ad una proprietà di input/output varia il suo valore ed una volta poco prima del ngOnInit.
+             Si basa su un oggetto chiamato SimpleChanges passato come parametro in ingresso:
+             Durante la change detection, quando Angular controlla le properties di Input del componente/direttiva
+             per rilevare cambiamento, usa (essenzialmente) l'operatore === per rilevare differenze. 
+             Per gli array e gli oggetti che si basano sui valori by reference rispetto ai tipi primitivi che sono by value,
+             questo significa che non verranno rilevate modifiche finchè non cambia la loro referenza e non uno dei loro sotto-valori.
+             In questi 2 casi ngOnChanges si rivela inutile e le 2 possibili soluzioni sono:
+             - Se si vuole continuare ad usare ngOnChanges bisognerà ri-inizializzare tutto l'array o tutto l'oggetto per assicurarsi che venga rilevato un cambiamento sulla reference
+             - Implementare ngDoCheck() ed eseguire al suo interno la change detection logic per determinare se l'oggetto o l'array sono variati.
+
+ngOnInit: Chiamato dopo il primo ngOnChanges.
+          Inizializza la directive/component dopo che Angular mostra le proprietà bindate e setta le proprietà di Input del directive/component.
+          Quindi deve essere utilizzato per:
+          Performare inizializzazioni dopo aver chiamato il costruttore del componente/direttiva.
+          Per settare valori del componente dopo che Angular ha settato le proprietà di Input.
+          NOTA: il costruttore NON deve chiamare servizi per inizializzare il componente
+                ngOnInit deve chiamare servizi per inizializzare il componente
+ngDoCheck: rilevazioni del cambio di valori custom dello sviluppatore.
+           Chiamato durante ogni volta che viene rilevata una modifica,
+           immediatamente dopo ogni ngOnChanges() e ngOnInit().
+ngAfterContentInit: Chiamato dopo che il contenuto esterno del componente (html e css) è stato inizializzato nella view.
+                    Chiamato una volta prima del ngDoCheck().
+                    E' un hook disponibile solo per i componenti.
+ngAfterContentChecked: Chiamato dopo ogni check (controllo) del contenuto del componente.
+                       Chiamato dopo il ngAfterContentInit() e dopo ogni ngDoCheck().
+                       E' un hook disponibile solo per i componenti.
+ngAfterViewInit: Chiamato dopo che Angular inizializza le viste del componente e le viste figlie.
+                 Chiamato una volta dopo ngAfterContentChecked().
+                 E' un hook disponibile solo per i componenti.
+ngAfterViewChecked: Chiamato dopo che Angular controlla le viste del componente e le viste figlie.
+                    Chiamato dopo il ngAfterViewInit ed ad ogni ngAfterContentChecked().
+                    E' un hook disponibile solo per i componenti.
+ngOnDestroy: Chiamata un attimo prima che la direttiva sia distrutta.
+             Serve a pulire i dati salvati prima che la directive/component venga eliminata,
+             ed a fare l'unsubscribe di Observables e detach (staccare) event handlers per evitare memory leak.

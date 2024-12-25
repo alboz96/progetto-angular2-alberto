@@ -1,0 +1,7 @@
+<div>
+  <input type="file" name="myFile" id="myFile" data-max-size="500" (change)="fileChange($event)" [(ngModel)]="fileModel" placeholder="Upload file">
+  <!-- accept="image/png, image/jpeg" --> <!--Per filtrare i tipi di files-->
+</div>
+<div>
+  <input type="button" value="Per fare il download del file di cui ho fatto l'upload" (click)="downloadFile()">
+</div>

@@ -1,0 +1,31 @@
+.page-size{
+    width:100%;
+    height: 100%;
+}
+
+.sidebarClass{
+    border-right: solid black 2px;
+    background-color: #17a2b8;
+    padding-top:10px;
+    /* overflow-y: scroll; */
+}
+
+.navbarBorders{
+    border-bottom: solid black 2px;
+}
+
+.footerBorders{
+    border-top: solid black 2px;
+}
+
+.navbar-size{
+    height: 10%;
+}
+
+.content-size{
+    height: 80%;
+}
+
+.footer-size{
+    height: 10%;
+}

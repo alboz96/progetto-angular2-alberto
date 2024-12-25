@@ -1,0 +1,96 @@
+RIASSUNTO PROPRIETA' , EVENTI E NGMODEL :
+Per rendere dinamiche le proprietà di un TAG HTML (DOM)(per esempio src del tag img), si usa la sintassi 
+[attributo tag]="variabile o funzione da bindare"
+Esempio: <img [src]="funzione()"/>
+Oppure: <img bind-src="funzione()"/>
+Esempio2: ng-show di angular js NON esiste in Angular2 perciò dovremo usare una proprietà esistente del DOM
+	  <div [hidden] = "nomeVariabile" > </div>
+
+Le proprietà [...] vengono usate anche per inizializzare o associare 
+una funzione ad una variabile all'interno di un componente(ovvero una proprietà @Input)
+<articolo [articolo]="myArticolo" (like)="mostraMessaggiRingraziamento ($event)"></articolo>
+myArticolo è una variabile nel componente in cui si trova il TAG articolo (in questo caso AppComponent), 
+mentre articolo è la variabile all'interno del componente Articolo che riceve variabili o valori tornati
+da funzioni grazie al decoratore @Input.
+Like è un evento custom presente nel componente articolo che, tramite il decoratore @Output e l'oggetto 
+eventEmitter, genera un evento verso i componenti "padre" più esterni al componente articolo
+(in questo caso AppComponent in quanto usa Articolo al suo interno) passandogli dei parametri,
+mentre il metodo mostraMessaggiRingraziamento ($event)
+Verrà gestito dal componente che usa al suo interno articolo (in questo caso AppComponent)
+
+Per usare un evento, si usa la sintassi:
+(evento)="funzione o variabile da inizializzare"
+Esempio: <button (click)="funzione()"/>
+Oppure: <button on-click="funzione()"/>
+[(ngModel)]="variabile nella classe .ts"
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+1) ESEMPIO INPUT e OUTPUT:
+src/app/hero-detail.component.ts (template)  (HTML componente FIGLIO)
+
+template: `
+<div>
+  <img src="{{heroImageUrl}}">
+  <span [style.text-decoration]="lineThrough">
+    {{prefix}} {{hero?.name}}
+  </span>
+  <button (click)="delete()">Delete</button>
+</div>`
+
+--------------------------------------------------------------------------------
+
+src/app/hero-detail.component.ts (deleteRequest)  (TS componente FIGLIO)
+
+// This component makes a request but it can't actually delete a hero.
+@Input hero: Hero;
+@Output deleteRequest = new EventEmitter<Hero>();
+
+delete() {
+  this.deleteRequest.emit(this.hero);
+}
+--------------------------------------------------------------------------------
+src/app/app.component.html (event-binding-to-component) (HTML componente PADRE)
+
+<app-hero-detail (deleteRequest)="deleteHero($event)" [hero]="currentHero"></app-hero-detail>
+
+----------------------------------------------------------------------------------------------------
+
+2) ESEMPIO Input e Output e Two-Way-Binding
+
+FILE .ts (src/app/sizer.component.ts):
+
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+ 
+@Component({
+  selector: 'app-sizer',
+  template: `
+  <div>
+    <button (click)="dec()" title="smaller">-</button>
+    <button (click)="inc()" title="bigger">+</button>
+    <label [style.font-size.px]="size">FontSize: {{size}}px</label>
+  </div>`
+})
+export class SizerComponent {
+  @Input()  size: number | string;
+  @Output() sizeChange = new EventEmitter<number>();
+ 
+  dec() { this.resize(-1); }
+  inc() { this.resize(+1); }
+ 
+  resize(delta: number) {
+    this.size = Math.min(40, Math.max(8, +this.size + delta));
+    this.sizeChange.emit(this.size);
+  }
+}
+-----------------------------------------------------------------------------------------------------------------------
+
+FILE HTML (src/app/app.component.html (two-way-binding esempio 1)): 
+
+<app-sizer [(size)]="fontSizePx"></app-sizer>   <!-- fontSizePx è una variabile nel file .ts di appComponent, bindata con la proprietà size dell' appSizerComponent -->
+<div [style.font-size.px]="fontSizePx">Resizable Text</div>
+-------------------------------------------------------------------------------------------------------------------------
+
+FILE HTML (src/app/app.component.html (two-way-binding esempio 2)): 
+
+<app-sizer [size]="fontSizePx" (sizeChange)="fontSizePx=$event"></app-sizer> <!-- stessa cosa dell'html sopra, ma con input e output separati (fontSizePx è inizializzato con l'evento emesso dall'emit ($event))-->

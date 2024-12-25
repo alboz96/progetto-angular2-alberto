@@ -1,0 +1,91 @@
+<a id="top"></a>
+<b>Ogni direttiva ed ogni compoennte hanno lo stesso set di lifecycle hooks, tranne (meno) gli hooks che sono specifici per componenti content e views. </b>
+<p>
+  ngOnChanges: chiamato una volta prima di ngOnInit e quando ad una proprietà di input/output varia il suo valore.
+  <br>
+  ngOnInit: dopo il primo ngOnChanges, appena il componente viene inizializzato.
+  <br>
+  ngDoCheck: rilevazioni del cambio di valori custom dello sviluppatore.
+  <br>
+  ngAfterContentInit: dopo che il contenuto del componente è stato inizializzato.
+  <br>
+  ngAfterContentChecked: dopo ogni check (controllo) del contenuto del componente.
+  <br>
+  ngAfterViewInit: dopo che le viste del componente sono state inizializzate.
+  <br>
+  ngAfterViewChecked: dopo ogni check della vista del componente.
+  <br>
+  ngOnDestroy: un attimo prima che la direttiva sia distrutta.
+</p>
+<br>
+<h3>ESEMPI:</h3>
+<a (click) = "goToAnchor('hooks')" >Peek-a-boo: (most) lifecycle hooks</a><br>
+<a (click) = "goToAnchor('onchanges')">OnChanges</a><br>
+<a (click) = "goToAnchor('docheck')">DoCheck</a><br>
+<a (click) = "goToAnchor('after-view')">AfterViewInit & AfterViewChecked</a><br>
+<a (click) = "goToAnchor('after-content')">AfterContentInit & AfterContentChecked</a><br>
+<a (click) = "goToAnchor('spy')">Spy: directive with OnInit & OnDestroy</a><br>
+<a (click) = "goToAnchor('counter')">Counter: OnChanges + Spy directive</a><br>
+<br>
+<a id="hooks"></a>
+<b class="red">Esempio 1: Tutti i Lifecycle Hooks insieme</b>
+<peek-a-boo-parent></peek-a-boo-parent>
+<a (click) = "goToAnchor('top')">back to top</a>
+<br>
+<a id="spy"></a>
+<b class="red">Esempio 2: Custom directive per utilizzare i lifecycle hooks per osservare (watch) il comportamento di altri componenti </b>
+<spy-parent></spy-parent>
+<a (click) = "goToAnchor('top')">back to top</a>
+<br>
+<a id="onchanges"></a>
+<b class="red">Esempio 3: ngOnChanges, componente custom con properties di Input per testare ngOnChanges lifecycleHook</b>
+<b>IMPORTANTE: ngOnChanges viene chiamata solo quando la property di Input varia il suo valore: se è una stringa, basta cambiare il valore della stringa,
+  invece nel caso di hero (oggetto), bisognerà cambiare il reference della property e NON basterà cambiarne il valore di una sua sottoproperty.
+  Se si volesse osservare solo la property name, l'Input dovrà essere hero.name . In questo caso, quindi hero.name NON viene rilevata come modifica
+</b>
+<on-changes-parent></on-changes-parent>
+<a (click) = "goToAnchor('top')">back to top</a>
+<br>
+<a id="docheck"></a>
+<b class="red">Esempio 4: ngDoCheck, per trovare cambiamenti e differenze che Angular ngOnChanges non riesce a rilevare (SOLUZIONE ALL'Esempio 3). In questo caso devo salvarmi i valori precedenti, in quanto non ho SimpleChanges come nell'ngOnChange</b>
+<do-check-parent></do-check-parent>
+<a (click) = "goToAnchor('top')">back to top</a>
+<br>
+<a id="after-view"></a>
+<b class="red">Esempio 5: ngAfterView</b>
+<b>
+  ngAfterViewInit: <br>
+  Chiamato dopo che Angular inizializza le viste del componente e le viste figlie. <br>
+  Chiamato una volta dopo ngAfterContentChecked(). <br>
+</b>
+<b> 
+  ngAfterViewChecked: <br>
+  Chiamato dopo ogni check (controllo) del contenuto del componente. <br>
+  Chiamato dopo il ngAfterContentInit() e dopo ogni ngDoCheck(). <br>
+</b>
+<p> il metodo tick_then attende un istante perchè la vista è stata già checkata (controllata) <br>
+  Perchè il metodo doSomething() deve aspettare un attimo (tick) prima di aggiornare la variabile comment? <br>
+  Le regole del flusso dati unidirezionale di Angular proibisce di aggiornare la vista dopo che è stata composta. <br>
+  Entrambi questi hooks agiscono dopo che la vista del componente è stata composta (caricata). <br>
+  Angular rilancia un errore se l'hook aggiorna i dati bindati dalla property comment immediatamente.</p>
+<after-view-parent></after-view-parent>
+<a (click) = "goToAnchor('top')">back to top</a>
+<br>
+<a id="after-content"></a>
+<b class="red">Esempio 6: AfterContent </b>
+<b>AfterContentInit:</b> 
+<b>AfterContentChecked:</b>
+<b>Hooks che Angular chiama dopo che vengano caricati contenuti esterni nel componente:</b>
+<b>Tra ngAfterView e ngAfterContent vi è una piccola differenza:<br>
+  Content projection è un modo per importare contenuto HTML dall'esterno del componente ed importare<br>
+  quel contenuto nel template (hmtl) del componente in un PUNTO DESIGNATO APPOSTA (ngAfterContent).<br>
+  In AngularJS questa tecnica è nota come "transclusion". Quindi in questo esempio si ripropone l'esempio<br>
+  precedente, senza dover aspettare l'attimo (tick) per effettuare modifiche al content del componente. <br>
+  Il segno evidente della content projection prevede 2 cose:
+  1) HTML all'interno dei TAG del componente che deve ospitare il template (quindi il contenuto).
+  2) La presenza del tag ng-content all'interno del template del componente (.html).
+</b>
+<after-content-parent></after-content-parent>
+<a (click) = "goToAnchor('top')">back to top</a>
+<b class="red">Esempio 6: Esempio Counter</b>
+<counter-parent></counter-parent>

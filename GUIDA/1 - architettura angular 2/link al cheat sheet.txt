@@ -1,0 +1,2 @@
+ANGULAR 2 => https://v2.angular.io/docs/ts/latest/guide/cheatsheet.html
+ANGULAR 7.2.4 (attuale) => https://angular.io/guide/cheatsheet 

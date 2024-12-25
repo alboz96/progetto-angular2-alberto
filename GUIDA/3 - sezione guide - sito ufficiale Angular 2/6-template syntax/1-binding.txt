@@ -1,0 +1,24 @@
+// 1) binding
+<p>My current hero is {{currentHero.name}}</p>
+<p>The sum of 1 + 1 is not {{1 + 1 + getVal()}}</p>
+
+//one-way da .ts a .html (da ts -> view)
+{{expression}} -> viene valutata l'espressione
+[target]="expression"  -> viene valutata l'espressione
+target="expression" ->  NON viene valutata l'espressione
+target="{{expression}}"  -> viene valutata l'espressione
+[target]="{{expression}}"  -> errore di compilazione e NON viene valutata l'espressione
+bind-target="expression"
+
+//one-way da .html a .ts (da view -> ts)
+(target)="statement"
+on-target="statement"
+
+//two-way binding
+[(target)]="expression"  (ricorda: parentesi come matematica (quadre e tonde) oppure banana in a box [()])
+ESEMPIO:
+ <input [(ngModel)]="nomeVariabile">
+<input [(ngModel)]="nomeVariabile.proprietà">
+bindon-target="expression"
+
+I tipi di binding oltre all'interpolazione {} hanno un target name circondato da [] oppure da () o preceduto da un prefisso (bind-, on-, bindon-)

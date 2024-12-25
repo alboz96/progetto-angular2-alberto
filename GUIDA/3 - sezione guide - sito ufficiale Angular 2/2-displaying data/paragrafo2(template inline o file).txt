@@ -1,0 +1,6 @@
+app-ng2-guida-6-1 e app-ng2-guida-6-2:
+
+Il template html di una classe con applicato il decorator @Component (un Componente) può essere inserito in 2 modi diversi:
+-tramite la proprietà template: `codice html` del Componente se inline (nota bene i backtick per racchiudere il template)
+-tramite la proprietà templateUrl del Componente se importato da file esterno 
+

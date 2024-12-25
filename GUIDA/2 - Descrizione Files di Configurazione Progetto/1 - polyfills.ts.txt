@@ -1,0 +1,6 @@
+- polyfills.ts è il file in cui vengono aggiunte le funzioni js che verranno sovrascritte nei prototype 
+  delle rispettive classi js per risolvere problemi di compatibilità con IE (explorer)
+
+- aggiungo nell'index.html
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.35.3/es6-shim.min.js"></script>
+  per aggiungere i polyfills principali di ECMA Script 6

@@ -1,0 +1,154 @@
+Il package.json puo' essere costituito dalle seguenti sezioni:
+ "dependencies": { } -> usato per elencare le dipendenze che verranno usate in qualsiasi ambiente
+ "devDependencies": { } -> usato per elencare le dipendenze da usare solo in sviluppo
+
+Le dependencies includono i packages per:
+- Features: per le funzionalita' del framework e delle utility. (Quelle che iniziano per @angular/)
+- Polyfills: Polyfills coprono i buchi nei browsers che non implementano tutte le funzionalità di JavaScript.
+- Other: Altre librerie che supportano l'applicazione come ad esempio bootstrap per HTML widgets and styling.
+
+differenza tra dependencies e peerDependencies:
+- Una dependency dice: "Ho bisogno direttamente di questa cosa"
+- Una peerDependency dice: "Se vuoi usarmi, hai bisogno che questa cosa sia disponibile"
+
+per scaricare tutte le dipendenze, usare:
+npm install
+
+per non scaricare le dipendenze di sviluppo, basta installare le dipendenze con questo comando:
+npm install my-application --production
+
+IMPORTANTE:
+Quando npm installa i packages listati nella sezione dependencies, 
+installa anche i packages listati con i packages dipendendi a loro stessi. 
+Il processo è ricorsivo.
+
+Quando i node_modules vengono aggiornati da npm tramite package-lock.json
+
+IMPORTANTE: COME SPECIFICARE LE VERSIONI DEI PACKAGES 
+-  version ->  Must match version exactly
+-  >version -> Must be greater than version
+-  >=version -> Must be greater or equal than version
+-  <version -> Must be lower than version
+-  <=version -> Must be lower or equal than version
+-  ~version -> “Approximately equivalent to version” (See semver)
+-  ^version -> “Compatible with version” (See semver)
+-  1.2.x -> 1.2.0, 1.2.1, etc., but not 1.3.0
+-  http://... -> See ‘URLs as Dependencies’ below
+-  * -> Matches any version
+-  "" -> (just an empty string) Stessa cosa del *
+-  version1 - version2 -> Stessa cosa del >=version1 <=version2.
+-  range1 || range2 -> Passa se range1 o range2 sono soddisfatti.
+-  git... -> See ‘Git URLs as Dependencies’ below
+-  user/repo -> See ‘GitHub URLs’ below
+-  tag -> A specific version tagged and published as tag See npm-dist-tag
+-  path/path/path -> See Local Paths below
+
+I git Urls vengono specificati con la seguente sintassi:
+<protocol>://[<user>[:<password>]@]<hostname>[:<port>][:][/]<path>[#<commit-ish> | #semver:<semver>]
+
+<protocol> e' uno dei seguenti: git, git+ssh, git+http, git+https, or git+file.
+
+ESEMPI per le dipendenze da Git:
+git+ssh://git@github.com:npm/cli.git#v1.0.27
+git+ssh://git@github.com:npm/cli#semver:^5.0
+git+https://isaacs@github.com/npm/cli.git
+git://github.com/npm/cli.git#v1.0.27
+
+ESEMPIO PER SPECIFICARE LE versioni delle dependencies:
+{ "dependencies" :
+  { "foo" : "1.0.0 - 2.9999.9999"
+  , "bar" : ">=1.0.2 <2.1.2"
+  , "baz" : ">1.0.2 <=2.3.4"
+  , "boo" : "2.0.1"
+  , "qux" : "<1.0.0 || >=2.3.1 <2.4.5 || >=2.5.2 <3.0.0"
+  , "asd" : "http://asdf.com/asdf.tar.gz"
+  , "til" : "~1.2"
+  , "elf" : "~1.2.3"
+  , "two" : "2.x"
+  , "thr" : "3.3.x"
+  , "lat" : "latest"
+  , "dyl" : "file:../dyl"  //Per i path locali
+  }
+}
+
+ESEMPIO di package.json:
+{
+  "name": "Nome Mio Package", //Nome e versione del package sono obbligatori nel caso dovessi renderlo pubblico online (chiave univoca) 
+  "version": "0.0.0", //versione mio package
+  "description": "descrizione del mio package", //serve per facilitare la ricerca del mio pacchetto con npm search
+  "homepage": "https://github.com/owner/project#readme", //the url to the project homepage
+  "license": "MIT",
+  "scripts": { // serie di comandi che devono essere eseguiti tante volte durante il ciclo di vita dell'applicazione
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build --prod",
+    "build:dev": "ng build --dev",
+    "test": "ng test",
+    "lint": "ng lint",
+    "e2e": "ng e2e"
+  },
+  "config": { "port" : "8080" }, //A “config” object can be used to set configuration parameters used in package scripts that persist across upgrades.
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "^4.2.4",
+    "@angular/common": "^4.2.4",
+    "@angular/compiler": "^4.2.4",
+    "@angular/core": "^4.2.4",
+    "@angular/flex-layout": "^2.0.0-beta.10",
+    "@angular/forms": "^4.2.4",
+    "@angular/http": "^4.2.4",
+    "@angular/platform-browser": "^4.2.4",
+    "@angular/platform-browser-dynamic": "^4.2.4",
+    "@angular/router": "^4.2.4",
+    "@ng-bootstrap/ng-bootstrap": "^1.0.0-alpha.28",
+    "@ngx-translate/core": "^8.0.0",
+    "@ngx-translate/http-loader": "^2.0.1",
+    "@types/file-saver": "^1.3.0",
+    "angular2-draggable": "^1.1.0",
+    "bootstrap": "^3.3.7",
+    "cjlib": "file:repository\\cjlib",
+    "classlist.js": "^1.1.20150312",
+    "core-js": "^2.4.1",
+    "file-saver": "^1.3.3",
+    "intl": "^1.2.5",
+    "rxjs": "^5.4.2",
+    "systemjs": "0.20.15",
+    "underscore": "^1.8.3",
+    "web-animations-js": "^2.3.1",
+    "zone.js": "^0.8.14"
+  },
+  "devDependencies": {
+    "@angular/cli": "1.7.4",
+    "@angular/compiler-cli": "^4.2.4",
+    "@angular/language-service": "^4.2.4",
+    "@compodoc/compodoc": "^1.1.3",
+    "@types/jasmine": "~2.5.53",
+    "@types/jasminewd2": "~2.0.2",
+    "@types/node": "~6.0.60",
+    "codelyzer": "~3.1.1",
+    "eslint": "~5.5.0",
+    "jasmine-core": "~2.6.2",
+    "jasmine-spec-reporter": "~4.1.0",
+    "karma": "~1.7.0",
+    "karma-chrome-launcher": "~2.1.1",
+    "karma-cli": "~1.0.1",
+    "karma-coverage-istanbul-reporter": "^1.2.1",
+    "karma-jasmine": "~1.1.0",
+    "karma-jasmine-html-reporter": "^0.2.2",
+    "protractor": "~5.1.2",
+    "ts-node": "~3.2.0",
+    "tslint": "~5.3.2",
+    "typescript": "~2.3.3"
+  },
+    "peerDependencies": {
+    "@angular/core": "^2.4.10 || ^4.0.0",
+    "@angular/common": "^2.4.10 || ^4.0.0",
+    "@angular/http": "^2.4.10 || ^4.0.0",
+    "@angular/router" : "^3.4.10 || ^4.0.0",
+    "@angular/animations" : "^3.4.10 || ^4.0.0",
+    "classlist.js": "^1.1.20150312",
+    "web-animations-js": "^2.3.1",
+    "intl": "^1.2.5",
+    "bootstrap": "^3.3.7"
+  },
+}

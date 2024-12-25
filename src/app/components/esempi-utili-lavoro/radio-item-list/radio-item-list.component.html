@@ -1,0 +1,11 @@
+<form (ngSubmit)="onSubmit()" #myForm="ngForm">
+  <div class="form-group">
+    <p *ngFor="let item of items" >
+      <input 
+      [value]="item.value"
+      [(ngModel)]="formModel.selectedRadio"
+      type="radio" name="personaggio" (change)="onChangeSelection(item)">
+      <label>{{item.description}}</label>
+    </p>
+  </div>
+</form>

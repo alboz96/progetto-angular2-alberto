@@ -1,0 +1,2 @@
+Decorators (le Annotations) sono funzioni che modificano le classi JavaScript. 
+Angular ha più decoratori che attaccano metadati a classi cosi da spiegare cosa fa quella classe e come dovrebbe funzionare. 
